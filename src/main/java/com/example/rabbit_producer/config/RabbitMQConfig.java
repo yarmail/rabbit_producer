@@ -12,21 +12,21 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    @Value("${spring.rabbit.host}")
+    @Value("${spring.rabbitmq.host}")
     String host;
 
-    @Value("${spring.rabbit.username}")
+    @Value("${spring.rabbitmq.username}")
     String username;
 
-    @Value("${spring.rabbit.password}")
+    @Value("${spring.rabbitmq.password}")
     String password;
 
     @Bean
-    CachingConnectionFactory connectionFactory() {
+     CachingConnectionFactory connectionFactory() {
         CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory(host);
         cachingConnectionFactory.setUsername(username);
         cachingConnectionFactory.setPassword(password);
-        return connectionFactory();
+        return cachingConnectionFactory;
     }
 
     @Bean

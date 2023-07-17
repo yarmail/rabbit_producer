@@ -1,0 +1,3 @@
+Данный проект сделан на основе работы Pedro Luiz
+(через VPN) https://levelup.gitconnected.com/rabbitmq-with-java-and-spring-asynchronous-communication-between-microservices-c087595c500b
+https://github.com/pedroluiznogueira/messaging-microservices-rabbitmq
