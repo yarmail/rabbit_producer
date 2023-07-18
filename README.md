@@ -55,8 +55,18 @@
 </pre>
 начинаем проверку работоспособности <br>
 Для этого запускаем Postman и отправляем запрос типа POST<br>
-`http://localhost:8081/api/produce`
-контейнеру rabbit_producer, который должен слушать порт 8081
+`http://localhost:8081/api/produce`<br>
+контейнеру rabbit_producer, который должен слушать порт 8081<br>
+Тело запроса Body (JSON)
+<pre>
+{
+    "userId": "ID1",
+    "userName": "pedro"
+}
+</pre>
+
+
+
 
 
 Для остановки docker-compose и удаления контейнеров и сети<br>

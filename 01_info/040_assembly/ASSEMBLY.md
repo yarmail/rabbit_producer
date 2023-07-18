@@ -49,7 +49,7 @@ services:
 ```
 
 Запускаем проект командой <br>
-`user1@ubuntu:~/rabbit_connect$ docker-compose up -d`
+`user1@ubuntu:~/rabbit_connect$ docker-compose up --build -d`
 
 <details>
 <summary>Результат команды docker-compose up -d</summary>
