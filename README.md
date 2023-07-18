@@ -20,9 +20,11 @@
 Описание проекта rabbit_producer.<br>
 Данный микросервис rabbit_producer получает от Пользователя (User, Client)<br>
 запросы, в виде данных пользователя и передает их через RabbitMQ <br> 
-в микросервис rabbit_consumer <br>
-Условия тестирования проекта: данный проект будет тестироваться с использованием <br>
-Ubuntu 22.04 и Docker. <br>
+в микросервис rabbit_consumer <br><br>
+Условия проверки работоспособности проекта: данный проект будет тестироваться<br> 
+с использованием Ubuntu 22.04 и Docker. <br>
+Разделим работу над проектом на 5 этапов: создание, уточнения по RabbitMQ, <br> 
+подготовка к сборке, сборка и запуск, тестирование (проверка на работоспособность) <br><br>
 
 <a href="/01_info/010_create_project/CREATE.md">010 Создание проекта rabbit_producer</a> <br>
 Информация о создании нового проекта, настройки проекта <br><br>
@@ -33,9 +35,40 @@ Ubuntu 22.04 и Docker. <br>
 <a href="/01_info/030_preparation/PREPARATION.md">030 Подготовка к сборке </a> <br>
 Проверка наличия необходимых для сборки компонентов. <br><br>
 
-Начинаем сборку и тестирование проекта <br>
+Начинаем сборку, запуск и тестирование проекта <br>
 Система, на которой происходит сборка и тестирование проектов: <br>
 ~ на системе установлен Windows 7 x64 <br>
 ~ на Windows установлен Oracle VirtualBox 7 <br>
 ~ на VirtualBox установлен Ubuntu 22.04.2 LTS <br>
+
+<a href="/01_info/040_assembly/ASSEMBLY.md">040 Сборка и запуск приложения</a> <br>
+Клонируем проекты с гита, создаем docker-compose.yml и запускаем приложение <br><br>
+
+<b>050 Проверка работоспособности приложения</b><br>
+Если все предыдущие этапы выполнены успешно и на данный момент запущены все нужные<br> 
+контейнеры
+<pre>
+ ✔ Network rabbit_connect_default  Created  
+ ✔ Container rabbitmq              Started  
+ ✔ Container rabbit_producer       Start... 
+ ✔ Container rabbit_consumer       Start...
+</pre>
+начинаем проверку работоспособности <br>
+Для этого запускаем Postman и отправляем запрос типа POST<br>
+`http://localhost:8081/api/produce`
+контейнеру rabbit_producer, который должен слушать порт 8081
+
+
+Для остановки docker-compose и удаления контейнеров и сети<br>
+связанные с контейнерной средой используем docker-compose down
+<pre>
+user1@ubuntu:~/rabbit_connect$ docker-compose down
+[+] Running 4/4
+ ✔ Container rabbit_producer       Removed                                                                   0.9s 
+ ✔ Container rabbit_consumer       Removed                                                                   0.9s 
+ ✔ Container rabbitmq              Removed                                                                   7.1s 
+ ✔ Network rabbit_connect_default  Removed                                                                   0.4s 
+</pre>
+
+
 
