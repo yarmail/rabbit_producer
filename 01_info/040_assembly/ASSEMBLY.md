@@ -24,7 +24,7 @@ rabbit_consumer  rabbit_producer
 user1@ubuntu:~/rabbit_connect$ nano docker-compose.yml <br>
 
 следующего содержания:
-```yaml
+```
 version: '3.8'
 services:
 
