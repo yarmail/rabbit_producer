@@ -5,7 +5,7 @@ app:
 # настройки RabbitMQ
 spring:
   rabbitmq:
-    host: localhost
+    host: rabbitmq # было localhost
     password: guest
     port: 15672
     username: guest
@@ -14,3 +14,7 @@ spring:
 
 server:
   port: 8081
+
+# Примечание
+# в файле docker-compose.yml мы назначаем сервису rabbitmq
+# hostname: rabbitmq, а здесь к нему обращаемся по этому имени
