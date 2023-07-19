@@ -11,10 +11,18 @@ spring:
     username: guest
     exchange: user.exchange
     routingkey: user.routingkey
+    cache:
+      connection:
+        mode: channel
 
 server:
   port: 8081
 
-# Примечание
+# Примечание 1
 # в файле docker-compose.yml мы назначаем сервису rabbitmq
 # hostname: rabbitmq, а здесь к нему обращаемся по этому имени
+
+# Примечание 2
+# Ошибка при передаче сообщения от rabbitmq
+# operation basic.publish caused a channel exception not_found: no exchange '{spring.rabbitmq.exchange}' in vhost
+# Пробуем ключ spring.rabbitmq.cache.connection.mode=channel # Connection factory cache mode.
