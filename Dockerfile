@@ -11,7 +11,7 @@ FROM alpine:latest
 RUN apk add --no-cache bash
 WORKDIR /app
 COPY wait-for.sh app/wait-for.sh
-RUN chmod +x /wait-for.sh
+RUN chmod +x app/wait-for.sh
 
 # Указание как запустить проект
 FROM openjdk:17.0.2-jdk
