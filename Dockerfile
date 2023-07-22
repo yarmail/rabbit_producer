@@ -9,7 +9,8 @@ RUN mvn install
 # В в данном случае ожидаем пока запустится сервис rabbitmq
 FROM alpine:latest
 RUN apk add --no-cache bash
-copy wait-for.sh /wait-for.sh
+WORKDIR /app
+COPY wait-for.sh app/wait-for.sh
 RUN chmod +x /wait-for.sh
 
 # Указание как запустить проект
