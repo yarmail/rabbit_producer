@@ -17,4 +17,4 @@ RUN chmod +x /wait-for.sh
 FROM openjdk:17.0.2-jdk
 WORKDIR /app
 COPY --from=maven /app/target/rabbit_producer-0.0.1-SNAPSHOT.jar app.jar
-ENTRYPOINT ["/wait-for.sh", "rabbitmq", "--timeout=20", "--", "java", "-jar", "app.jar"]
+ENTRYPOINT ["wait-for.sh", "rabbitmq", "--timeout=20", "--", "java", "-jar", "app.jar"]
