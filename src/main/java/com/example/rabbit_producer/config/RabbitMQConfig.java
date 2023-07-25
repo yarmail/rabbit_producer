@@ -67,11 +67,6 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    ApplicationRunner runner(ConnectionFactory connectionFactory) {
-        return args -> connectionFactory.createConnection().close();
-    }
-
-    @Bean
     public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }
@@ -83,13 +78,3 @@ public class RabbitMQConfig {
         return rabbitTemplate;
     }
 }
-
-/*
-Примечание 1:
-amqpAdmin() - для автоматического объявления очередей, обменов и привязок;
-
-runner() - Приложение Spring Boot подключается к экземпляру сервера
-RabbitMQ и создает Exchange и очереди при публикации первого сообщения.
-Если вы хотите, чтобы ваше приложение создавало Exchange и очереди
-при запуске приложения, вам следует использовать следующий метод.
- */
