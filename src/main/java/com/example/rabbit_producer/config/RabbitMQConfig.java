@@ -41,6 +41,7 @@ public class RabbitMQConfig {
         cachingConnectionFactory.setUsername(username);
         cachingConnectionFactory.setPassword(password);
         cachingConnectionFactory.setPort(port);
+        cachingConnectionFactory.setCacheMode(CachingConnectionFactory.CacheMode.CONNECTION);
         return cachingConnectionFactory;
     }
 
