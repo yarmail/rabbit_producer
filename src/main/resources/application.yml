@@ -9,7 +9,7 @@ spring:
     password: guest
     username: guest
     virtualHost: user.virtualHost
-    port: 15672
+    port: 5672
 
     exchange: user.exchange
     queue: user.queue
@@ -22,3 +22,6 @@ server:
 # Примечание 1
 # в файле docker-compose.yml мы назначаем сервису rabbitmq
 # hostname: rabbitmq, а здесь к нему обращаемся по этому имени
+
+# Примечание 2 (о портах)
+# по умолчанию порт: 5672 для amqp, 15672 - для управления
