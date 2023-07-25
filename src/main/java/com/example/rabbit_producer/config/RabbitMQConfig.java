@@ -14,20 +14,22 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    @Value("${spring.rabbitmq.host}")
+    @Value("${rabbitmq.host}")
     private String host;
-    @Value("${spring.rabbitmq.username}")
+    @Value("${rabbitmq.virtual_host}")
+    private String virtualHost;
+    @Value("${rabbitmq.username}")
     private String username;
-    @Value("${spring.rabbitmq.password}")
+    @Value("${rabbitmq.password}")
     private String password;
-    @Value("${spring.rabbitmq.port}")
+    @Value("${rabbitmq.port}")
     private int port;
 
-    @Value("${spring.rabbitmq.exchange}")
+    @Value("${rabbitmq.exchange}")
     private String exchange;
-    @Value("${spring.rabbitmq.queue}")
+    @Value("${rabbitmq.queue}")
     private String queue;
-    @Value("${spring.rabbitmq.routingkey}")
+    @Value("${rabbitmq.routingkey}")
     private String routingkey;
 
     @Bean
@@ -41,13 +43,13 @@ public class RabbitMQConfig {
         cachingConnectionFactory.setUsername(username);
         cachingConnectionFactory.setPassword(password);
         cachingConnectionFactory.setPort(port);
-        cachingConnectionFactory.setCacheMode(CachingConnectionFactory.CacheMode.CONNECTION);
+        cachingConnectionFactory.setVirtualHost(virtualHost);
         return cachingConnectionFactory;
     }
 
     @Bean
     DirectExchange exchange() {
-        return new DirectExchange(exchange,true, false);
+        return new DirectExchange(exchange);
     }
 
     @Bean

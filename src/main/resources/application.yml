@@ -3,17 +3,15 @@ app:
   message: message successfully sent
 
 # настройки RabbitMQ
-spring:
-  rabbitmq:
-    host: rabbitmq # было localhost
-    password: guest
-    username: guest
-    port: 5672
-
-    exchange: user.exchange
-    queue: user.queue
-    routingkey: user.routingkey
-
+rabbitmq:
+  host: rabbitmq # было localhost
+  virtual_host: /
+  password: guest
+  username: guest
+  port: 5672
+  exchange: user.exchange
+  queue: user.queue
+  routingkey: user.routingkey
 
 server:
   port: 8081
