@@ -12,11 +12,11 @@ public class ProducerService {
 
     private final RabbitTemplate rabbitTemplate;
 
-    @Value("{spring.rabbitmq.exchange}")
+    @Value("{spring.rabbitmq.userExchange}")
     private String exchange;
 
-    @Value("{spring.rabbitmq.routingkey}")
-    private String routingkey;
+    @Value("{spring.rabbitmq.userRoutingKey}")
+    private String routingKey;
 
     @Autowired
     public ProducerService(RabbitTemplate rabbitTemplate) {
@@ -24,6 +24,6 @@ public class ProducerService {
     }
 
     public void sendMessage(User user) {
-        rabbitTemplate.convertAndSend(exchange, routingkey, user);
+        rabbitTemplate.convertAndSend(exchange, routingKey, user);
     }
 }

@@ -8,29 +8,30 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
 
-    @Value("${producer.rabbitmq.host}")
+    @Value("${spring.rabbitmq.host}")
     private String host;
-    @Value("${producer.rabbitmq.virtual_host}")
+    @Value("${spring.rabbitmq.virtual-host}")
     private String virtualHost;
-    @Value("${producer.rabbitmq.username}")
+    @Value("${spring.rabbitmq.username}")
     private String username;
-    @Value("${producer.rabbitmq.password}")
+    @Value("${spring.rabbitmq.password}")
     private String password;
-    @Value("${producer.rabbitmq.port}")
+    @Value("${spring.rabbitmq.port}")
     private int port;
 
-    @Value("${producer.rabbitmq.exchange}")
-    private String exchange;
-    @Value("${producer.rabbitmq.queue}")
-    private String queue;
-    @Value("${producer.rabbitmq.routingkey}")
-    private String routingkey;
+    @Value("${spring.rabbitmq.userExchange}")
+    private String userExchange;
+    @Value("${spring.rabbitmq.userQueue}")
+    private String userQueue;
+    @Value("${spring.rabbitmq.userRoutingKey}")
+    private String userRoutingKey;
 
     @Bean
     public AmqpAdmin amqpAdmin() {
@@ -49,12 +50,12 @@ public class RabbitMQConfig {
 
     @Bean
     DirectExchange exchange() {
-        return new DirectExchange(exchange);
+        return new DirectExchange(userExchange);
     }
 
     @Bean
     public Queue queue() {
-        return new Queue(queue);
+        return new Queue(userQueue);
     }
 
     @Bean
@@ -62,7 +63,12 @@ public class RabbitMQConfig {
         return BindingBuilder
                 .bind(queue)
                 .to(exchange)
-                .with(routingkey);
+                .with(userRoutingKey);
+    }
+
+    @Bean
+    ApplicationRunner runner(ConnectionFactory connectionFactory) {
+        return args -> connectionFactory.createConnection().close();
     }
 
     @Bean
@@ -81,4 +87,9 @@ public class RabbitMQConfig {
 /*
 Примечание 1:
 amqpAdmin() - для автоматического объявления очередей, обменов и привязок;
+
+runner() - Приложение Spring Boot подключается к экземпляру сервера
+RabbitMQ и создает Exchange и очереди при публикации первого сообщения.
+Если вы хотите, чтобы ваше приложение создавало Exchange и очереди
+при запуске приложения, вам следует использовать следующий метод.
  */
