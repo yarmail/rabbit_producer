@@ -2,14 +2,18 @@ package com.example.rabbit_producer.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
 import java.io.Serializable;
 
 /**
  * Domain, Model, Entity
+ * Модель для передачи
  */
 
 @Getter
 @Setter
+@ToString
 public class User implements Serializable {
     private String userId;
     private String userName;

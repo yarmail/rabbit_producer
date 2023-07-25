@@ -1,7 +1,9 @@
 package com.example.rabbit_producer.config;
 
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
@@ -13,20 +15,54 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     @Value("${spring.rabbitmq.host}")
-    String host;
-
+    private String host;
     @Value("${spring.rabbitmq.username}")
-    String username;
-
+    private String username;
     @Value("${spring.rabbitmq.password}")
-    String password;
+    private String password;
+    @Value("${spring.rabbitmq.user.virtualHost}")
+    private String virtualHost;
+    @Value("${spring.rabbitmq.port}")
+    private int port;
+
+    @Value("${spring.rabbitmq.exchange}")
+    private String exchange;
+    @Value("${spring.rabbitmq.queue}")
+    private String queue;
+    @Value("${spring.rabbitmq.routingkey}")
+    private String routingkey;
+
+    @Bean
+    public AmqpAdmin amqpAdmin() {
+        return new RabbitAdmin(connectionFactory());
+    }
 
     @Bean
      CachingConnectionFactory connectionFactory() {
         CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory(host);
         cachingConnectionFactory.setUsername(username);
         cachingConnectionFactory.setPassword(password);
+        cachingConnectionFactory.setPort(port);
+        cachingConnectionFactory.setVirtualHost(virtualHost);
         return cachingConnectionFactory;
+    }
+
+    @Bean
+    DirectExchange exchange() {
+        return new DirectExchange(exchange,true, false);
+    }
+
+    @Bean
+    public Queue queue() {
+        return new Queue(queue);
+    }
+
+    @Bean
+    Binding binding(Queue queue, DirectExchange exchange) {
+        return BindingBuilder
+                .bind(queue)
+                .to(exchange)
+                .with(routingkey);
     }
 
     @Bean
@@ -41,3 +77,10 @@ public class RabbitMQConfig {
         return rabbitTemplate;
     }
 }
+
+/*
+Примечание 1:
+amqpAdmin() - для автоматического объявления очередей, обменов и привязок;
+
+
+ */
