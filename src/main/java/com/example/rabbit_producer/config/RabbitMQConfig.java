@@ -14,22 +14,22 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    @Value("${rabbitmq.host}")
+    @Value("${producer.rabbitmq.host}")
     private String host;
-    @Value("${rabbitmq.virtual_host}")
+    @Value("${producer.rabbitmq.virtual_host}")
     private String virtualHost;
-    @Value("${rabbitmq.username}")
+    @Value("${producer.rabbitmq.username}")
     private String username;
-    @Value("${rabbitmq.password}")
+    @Value("${producer.rabbitmq.password}")
     private String password;
-    @Value("${rabbitmq.port}")
+    @Value("${producer.rabbitmq.port}")
     private int port;
 
-    @Value("${rabbitmq.exchange}")
+    @Value("${producer.rabbitmq.exchange}")
     private String exchange;
-    @Value("${rabbitmq.queue}")
+    @Value("${producer.rabbitmq.queue}")
     private String queue;
-    @Value("${rabbitmq.routingkey}")
+    @Value("${producer.rabbitmq.routingkey}")
     private String routingkey;
 
     @Bean
@@ -81,6 +81,4 @@ public class RabbitMQConfig {
 /*
 Примечание 1:
 amqpAdmin() - для автоматического объявления очередей, обменов и привязок;
-
-
  */
