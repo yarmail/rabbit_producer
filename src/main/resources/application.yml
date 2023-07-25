@@ -8,7 +8,6 @@ spring:
     host: rabbitmq # было localhost
     password: guest
     username: guest
-    virtualHost: user.virtualHost
     port: 5672
 
     exchange: user.exchange
