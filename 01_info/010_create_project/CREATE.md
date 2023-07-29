@@ -13,7 +13,6 @@ Packaging - Jar <br><br>
 Spring Boot 3.1.1 <br>
 
 Dependencies: <br>
-Developer Tools > Lombok <br>
 Web > Spring Web <br> 
 Messaging > Spring for RabbitMQ <br><br> 
 
