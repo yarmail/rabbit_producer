@@ -2,8 +2,7 @@
 Проект состоит из двух микросервисов, соединенных RabbitMQ:<br>
 ~ rabbit_producer (данный проект) <br>
 ~ <a href="https://github.com/yarmail/rabbit_consumer">rabbit_consumer</a> <br>
-<b>Одна из идей проекта</b> - создание кода в одной ОС (в данном случае Windows 7)<br>
-а запуск кода в другой OC (в данном случае Ubuntu) за счет использования Docker.<br>
+
  
 <details>
 <summary>Примечание: информация о проекте</summary>
